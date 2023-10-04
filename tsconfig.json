@@ -21,5 +21,8 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "paths": {
+    "dragula": ["../node_modules/dragula/dist/dragula.min.js"]
+  }
 }

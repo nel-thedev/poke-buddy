@@ -1,11 +1,11 @@
 import './App.css';
-import PokemonCard from './components/PokemonCard';
+import PlayerArea from './components/PlayerArea';
 
 function App() {
   return (
-    <>
-      <PokemonCard active={true} />
-    </>
+    <div className="App">
+      <PlayerArea />
+    </div>
   );
 }
 

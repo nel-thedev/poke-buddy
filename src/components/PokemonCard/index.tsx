@@ -10,7 +10,7 @@ export interface Status {
 }
 
 export interface PokemonCardTypes {
-  active: boolean;
+  active?: boolean;
 }
 
 function PokemonCard({ active }: PokemonCardTypes) {
@@ -55,11 +55,12 @@ function PokemonCard({ active }: PokemonCardTypes) {
     setStatus(value);
   }
 
+
   return (
-    <>
+    <div >
       {active ? (
         <>
-          <Card>
+          <Card className='activePkmn'>
             {
               status.map((item, index) => {
                 return <Typography.Text style={{ color: statusOptions.find((status) => status.value == item[0])?.color }} key={index}>{item}{index < status.length - 1 ? ' & ' : ''}</Typography.Text>
@@ -114,9 +115,52 @@ function PokemonCard({ active }: PokemonCardTypes) {
           </Card>
         </>
       ) : (
-        <>ass</>
+        <>
+          <Card className='benchPkmn'>
+            {
+              status.map((item, index) => {
+                return <Typography.Text style={{ color: statusOptions.find((status) => status.value == item[0])?.color }} key={index}>{item}{index < status.length - 1 ? ' & ' : ''}</Typography.Text>
+              })
+            }
+            <Typography.Title level={2}>{damage}</Typography.Title>
+
+            <div>
+              {tempDamage !== 0 ? (
+                <>
+                  <Typography.Title
+                    level={5}
+                    style={
+                      tempDamage > 0 ? { color: 'red' } : { color: 'green' }
+                    }
+                  >
+                    {tempDamage}
+                  </Typography.Title>
+                </>
+              ) : (
+                <></>
+              )}
+              <div>
+                <Button
+                  type={'default'}
+                  onClick={() => setTempDamage(tempDamage - 10)}
+                >
+                  <MinusOutlined />
+                </Button>
+                <Button
+                  type={'default'}
+                  onClick={() => setTempDamage(tempDamage + 10)}
+                >
+                  <PlusOutlined />
+                </Button>
+                <Button type={'primary'} onClick={confirmDamage}>
+                  <CheckOutlined />
+                </Button>
+              </div>
+            </div>
+          </Card>
+        </>
       )}
-    </>
+    </div>
   );
 }
 
