@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { DragEndEvent } from '@dnd-kit/core';
-import { DndContext, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { DndContext, PointerSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import {
     SortableContext,
@@ -90,6 +90,12 @@ export default function PlayerArea() {
                 distance: 1,
             },
         }),
+        useSensor(TouchSensor, {
+            activationConstraint: {
+                distance: 1,
+                tolerance: 5,
+            },
+        })
     );
 
     const onDragEnd = ({ active, over }: DragEndEvent) => {
