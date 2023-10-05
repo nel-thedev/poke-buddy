@@ -2,6 +2,7 @@
 import { CheckOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Card, Cascader, Typography } from 'antd';
 import { useState } from 'react';
+import style from './pokemonCard.module.scss'
 
 export interface Status {
   value: string,
@@ -57,110 +58,68 @@ function PokemonCard({ active }: PokemonCardTypes) {
 
 
   return (
-    <div >
-      {active ? (
-        <>
-          <Card className='activePkmn'>
+    <Card className={style.card} bodyStyle={{ padding: '10px' }}>
+      <div className={style.cardPkmn}>
+        <div className={style.status}>
+          <div className={style.statusDamage}>
+            <div className={style.statusItem}>
+              <Typography.Title level={2} className={style.statusItem}>{damage}</Typography.Title>
+            </div>
+            <div className={style.statusItem}>
+              <Typography.Title
+                level={5}
+                style={
+                  tempDamage > 0 ? { color: 'red' } : tempDamage < 0 ? { color: 'green' } : { color: 'white' }
+                }
+                className={style.statusItem}
+              >
+                {tempDamage}
+              </Typography.Title>
+            </div>
+
+          </div>
+          <div className={style.statusCondition}>
             {
               status.map((item, index) => {
                 return <Typography.Text style={{ color: statusOptions.find((status) => status.value == item[0])?.color }} key={index}>{item}{index < status.length - 1 ? ' & ' : ''}</Typography.Text>
               })
-            }
-            <Typography.Title level={2}>{damage}</Typography.Title>
+            }&nbsp;
+          </div>
 
-            <div>
-              {tempDamage !== 0 ? (
-                <>
-                  <Typography.Title
-                    level={5}
-                    style={
-                      tempDamage > 0 ? { color: 'red' } : { color: 'green' }
-                    }
-                  >
-                    {tempDamage}
-                  </Typography.Title>
-                </>
-              ) : (
-                <></>
-              )}
-              <div>
-                <Cascader
-                  options={statusOptions}
-                  onChange={changeStatus}
-                  placeholder="Status"
-                  multiple
-                  suffixIcon={<></>}
-                  style={{ width: '80px' }}
-                  maxTagCount={0}
-                  maxTagPlaceholder="Status"
-                  allowClear={false}
-                />
-                <Button
-                  type={'default'}
-                  onClick={() => setTempDamage(tempDamage - 10)}
-                >
-                  <MinusOutlined />
-                </Button>
-                <Button
-                  type={'default'}
-                  onClick={() => setTempDamage(tempDamage + 10)}
-                >
-                  <PlusOutlined />
-                </Button>
-                <Button type={'primary'} onClick={confirmDamage}>
-                  <CheckOutlined />
-                </Button>
-              </div>
-            </div>
-          </Card>
-        </>
-      ) : (
-        <>
-          <Card className='benchPkmn'>
-            {
-              status.map((item, index) => {
-                return <Typography.Text style={{ color: statusOptions.find((status) => status.value == item[0])?.color }} key={index}>{item}{index < status.length - 1 ? ' & ' : ''}</Typography.Text>
-              })
-            }
-            <Typography.Title level={2}>{damage}</Typography.Title>
+        </div>
+        <div className={style.modifiers}>
+          <Cascader
+            options={statusOptions}
+            onChange={changeStatus}
+            placeholder="Status"
+            multiple
+            suffixIcon={<></>}
+            style={{ width: '100%' }}
+            maxTagCount={0}
+            maxTagPlaceholder="Status"
+          // allowClear={false}
 
-            <div>
-              {tempDamage !== 0 ? (
-                <>
-                  <Typography.Title
-                    level={5}
-                    style={
-                      tempDamage > 0 ? { color: 'red' } : { color: 'green' }
-                    }
-                  >
-                    {tempDamage}
-                  </Typography.Title>
-                </>
-              ) : (
-                <></>
-              )}
-              <div>
-                <Button
-                  type={'default'}
-                  onClick={() => setTempDamage(tempDamage - 10)}
-                >
-                  <MinusOutlined />
-                </Button>
-                <Button
-                  type={'default'}
-                  onClick={() => setTempDamage(tempDamage + 10)}
-                >
-                  <PlusOutlined />
-                </Button>
-                <Button type={'primary'} onClick={confirmDamage}>
-                  <CheckOutlined />
-                </Button>
-              </div>
-            </div>
-          </Card>
-        </>
-      )}
-    </div>
+          />
+          <div>
+            <Button
+              type={'default'}
+              onClick={() => setTempDamage(tempDamage - 10)}
+            >
+              <MinusOutlined />
+            </Button>
+            <Button
+              type={'default'}
+              onClick={() => setTempDamage(tempDamage + 10)}
+            >
+              <PlusOutlined />
+            </Button>
+            <Button type={'primary'} onClick={confirmDamage}>
+              <CheckOutlined />
+            </Button>
+          </div>
+        </div>
+      </div>
+    </Card>
   );
 }
 

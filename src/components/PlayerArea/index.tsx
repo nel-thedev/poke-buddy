@@ -12,6 +12,7 @@ import { CSS } from '@dnd-kit/utilities';
 import React, { useEffect, useState } from 'react';
 import { Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table'
+import styles from './playerArea.module.scss';
 
 import PokemonCard from '../PokemonCard';
 import ActiveArea from '../ActiveArea';
@@ -118,6 +119,8 @@ export default function PlayerArea() {
                     columns={columns}
                     dataSource={pokemon}
                     pagination={false}
+                    showHeader={false}
+                    className={styles.table}
                 />
             </SortableContext>
         </DndContext>

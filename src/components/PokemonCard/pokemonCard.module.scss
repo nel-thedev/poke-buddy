@@ -1,0 +1,41 @@
+
+.cardPkmn {
+    // width: 70vh;
+    display: flex;
+    flex-direction: row!important;
+    justify-content: space-between;
+}
+
+.status {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+}
+
+.modifiers {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.statusDamage {
+    width: 100%;
+    gap: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.statusItem {
+    margin: 0;
+    padding: 0;
+}
+
+.statusCondition {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
